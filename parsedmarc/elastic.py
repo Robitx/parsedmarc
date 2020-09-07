@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import os
 import logging
 from collections import OrderedDict
 
@@ -198,8 +197,8 @@ def set_hosts(hosts, use_ssl=False, ssl_cert_path=None,
             conn_params['verify_certs'] = False
 
     if ssl_client_cert:
-        conn_params["client_cert"] = os.path.join("/etc/certs", "client-dev.crt")
-        conn_params["client_key"] = os.path.join("/etc/certs", "client-dev.key")
+        conn_params["client_cert"] = ssl_client_cert
+        conn_params["client_key"] = ssl_client_key
         print(conn_params)
     connections.create_connection(**conn_params)
 
