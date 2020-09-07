@@ -194,6 +194,9 @@ def set_hosts(hosts, use_ssl=False, ssl_cert_path=None, timeout=60.0):
             conn_params['ca_certs'] = ssl_cert_path
         else:
             conn_params['verify_certs'] = False
+
+    conn_params["client_cert"] = os.path.join("./conf", "client-dev.crt"),
+    conn_params["client_key"] = os.path.join("./conf", "client-dev.key"),
     connections.create_connection(**conn_params)
 
 
