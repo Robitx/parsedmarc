@@ -358,7 +358,7 @@ def _main():
                 opts.elasticsearch_ssl_client_cert = elasticsearch_config[
                     "client_cert"]
             if "client_key" in elasticsearch_config:
-                opts.elasticsearch_ssl_cli = elasticsearch_config[
+                opts.elasticsearch_ssl_client_key = elasticsearch_config[
                     "client_key"]
         if "splunk_hec" in config.sections():
             hec_config = config["splunk_hec"]
