@@ -3,6 +3,8 @@
 import logging
 from collections import OrderedDict
 
+
+from elasticsearch import RequestsHttpConnection
 from elasticsearch_dsl.search import Q
 from elasticsearch_dsl import connections, Object, Document, Index, Nested, \
     InnerDoc, Integer, Text, Boolean, Ip, Date, Search
@@ -199,6 +201,8 @@ def set_hosts(hosts, use_ssl=False, ssl_cert_path=None,
     if ssl_client_cert:
         conn_params["client_cert"] = ssl_client_cert
         conn_params["client_key"] = ssl_client_key
+
+    conn_params["connection_class"] = RequestsHttpConnection
     print("="*72)
     print("\n")
     print(conn_params)
