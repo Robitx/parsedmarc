@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import os
 import logging
 from collections import OrderedDict
 
@@ -171,7 +172,8 @@ class AlreadySaved(ValueError):
     """Raised when a report to be saved matches an existing report"""
 
 
-def set_hosts(hosts, use_ssl=False, ssl_cert_path=None, timeout=60.0):
+def set_hosts(hosts, use_ssl=False, ssl_cert_path=None,
+              ssl_client_cert=None, ssl_client_key=None, timeout=60.0):
     """
     Sets the Elasticsearch hosts to use
 
@@ -195,9 +197,10 @@ def set_hosts(hosts, use_ssl=False, ssl_cert_path=None, timeout=60.0):
         else:
             conn_params['verify_certs'] = False
 
-    import os
-    conn_params["client_cert"] = os.path.join("/etc/certs", "client-dev.crt"),
-    conn_params["client_key"] = os.path.join("/etc/certs", "client-dev.key"),
+    if ssl_client_cert:
+        conn_params["client_cert"] = os.path.join("/etc/certs", "client-dev.crt")
+        conn_params["client_key"] = os.path.join("/etc/certs", "client-dev.key")
+        print(conn_params)
     connections.create_connection(**conn_params)
 
 

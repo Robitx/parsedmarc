@@ -218,6 +218,8 @@ def _main():
                      elasticsearch_index_suffix=None,
                      elasticsearch_ssl=True,
                      elasticsearch_ssl_cert_path=None,
+                     elasticsearch_ssl_client_cert=None,
+                     elasticsearch_ssl_client_key=None,
                      elasticsearch_monthly_indexes=False,
                      kafka_hosts=None,
                      kafka_username=None,
@@ -352,6 +354,12 @@ def _main():
             if "cert_path" in elasticsearch_config:
                 opts.elasticsearch_ssl_cert_path = elasticsearch_config[
                     "cert_path"]
+            if "client_cert" in elasticsearch_config:
+                opts.elasticsearch_ssl_client_cert = elasticsearch_config[
+                    "client_cert"]
+            if "client_key" in elasticsearch_config:
+                opts.elasticsearch_ssl_cli = elasticsearch_config[
+                    "client_key"]
         if "splunk_hec" in config.sections():
             hec_config = config["splunk_hec"]
             if "url" in hec_config:
@@ -488,6 +496,8 @@ def _main():
                 elastic.set_hosts(opts.elasticsearch_hosts,
                                   opts.elasticsearch_ssl,
                                   opts.elasticsearch_ssl_cert_path,
+                                  opts.elasticsearch_ssl_client_cert,
+                                  opts.elasticsearch_ssl_client_key,
                                   timeout=opts.elasticsearch_timeout)
                 elastic.migrate_indexes(aggregate_indexes=[es_aggregate_index],
                                         forensic_indexes=[es_forensic_index])
