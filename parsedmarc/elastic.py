@@ -199,7 +199,9 @@ def set_hosts(hosts, use_ssl=False, ssl_cert_path=None,
     if ssl_client_cert:
         conn_params["client_cert"] = ssl_client_cert
         conn_params["client_key"] = ssl_client_key
-        print(conn_params)
+    print("="*72)
+    print("\n")
+    print(conn_params)
     connections.create_connection(**conn_params)
 
 
